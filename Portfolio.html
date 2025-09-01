@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omkar Salunkhe - AI-Powered Content Writer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #0f0f23;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            color: white;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+        }
+
+        .portfolio-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-metrics {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .metric {
+            background: #f8f9ff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: #f8f9ff;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .skill-category h4 {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #667eea;
+            border: 1px solid #e0e7ff;
+            font-weight: 500;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .floating-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-link:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .subtitle { font-size: 1.1rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .floating-nav { position: relative; top: 0; right: 0; margin: 20px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+            .contact-info { flex-direction: column; align-items: center; }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid rgba(255,255,255,.75);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(255,255,255,.75); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <div class="nav-links">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#portfolio" class="nav-link">Work</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="ai-badge">
+                <i class="fas fa-robot"></i> AI-Powered Content Creator
+            </div>
+            <h1 class="typewriter">Omkar Salunkhe</h1>
+            <p class="subtitle">Transforming Ideas into Viral Content with AI Innovation</p>
+            <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 2rem;">
+                Fresh Graduate with Deep AI Knowledge • Ready to Turn Theory into Results for Your Brand
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="#portfolio" class="btn btn-primary">
+                    <i class="fas fa-eye"></i> View My Work
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <i class="fas fa-coffee"></i> Let's Connect
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & Stats Section -->
+    <section class="section">
+        <h2 class="section-title">Why Choose Me?</h2>
+        <p style="text-align: center; font-size: 1.2rem; color: #666; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+            I've spent countless hours mastering AI tools and studying content strategies. Now I'm ready to apply this knowledge to real projects and deliver exceptional results for your brand.
+        </p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">AI Tools Studied</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Hours Learning</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Ego, All Passion</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Potential to Grow</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section" style="background: #f8f9ff;">
+        <h2 class="section-title">My Content Superpowers</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23E4405F' d='M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z'/%3E%3C/svg%3E" width="48" height="48" alt="Instagram" style="margin-bottom: 1rem;">
+                </div>
+                <h3>Instagram Content Strategy</h3>
+                <p>I've studied viral Instagram trends, hashtag strategies, and engagement tactics. Ready to create scroll-stopping content with AI-generated captions and optimal posting schedules.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath fill='%23FF0000' d='M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z'/%3E%3C/svg%3E" width="48" height="48" alt="YouTube" style="margin-bottom: 1rem;">
+                </div>
+                <h3>YouTube Content Planning</h3>
+                <p>Studied YouTube algorithm, thumbnail psychology, and video hooks. Ready to script engaging videos, optimize descriptions, and create content that increases watch time.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%230A66C2' d='M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z'/%3E%3C/svg%3E" width="48" height="48" alt="LinkedIn" style="margin-bottom: 1rem;">
+                </div>
+                <h3>LinkedIn Professional Content</h3>
+                <p>Mastered LinkedIn's professional tone, B2B content strategies, and thought leadership posting. Ready to build your professional brand with engaging posts and articles.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%231DA1F2' d='M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z'/%3E%3C/svg%3E" width="48" height="48" alt="Twitter" style="margin-bottom: 1rem;">
+                </div>
+                <h3>Twitter/X Engagement</h3>
+                <p>Learned Twitter's fast-paced environment, trending topics utilization, and thread creation. Ready to create viral tweets and build engaged communities.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-robot" style="font-size: 3rem; color: #667eea; margin-bottom: 1.5rem;"></i>
+                </div>
+                <h3>AI-Powered Content Creation</h3>
+                <p>Certified in Generative AI tools usage. Can leverage ChatGPT, Claude, RunwayML, and Notion AI to create, optimize, and scale content production efficiently.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line" style="font-size: 3rem; color: #667eea; margin-bottom: 1.5rem;"></i>
+                </div>
+                <h3>Content Strategy & Analytics</h3>
+                <p>Studied data-driven content strategies, competitor analysis, and performance metrics. Ready to create content that aligns with business goals and delivers measurable results.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <h2 class="section-title">My Approach & Learning Projects</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 3rem;">
+            While I'm new to professional content writing, I've been actively studying and practicing. Here's my approach and sample strategies I've developed:
+        </p>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <div class="portfolio-header">
+                    <h3>Instagram Growth Strategy</h3>
+                    <div class="portfolio-tag">Research-Based</div>
+                    <div class="portfolio-tag">AI-Assisted</div>
+                </div>
+                <div class="portfolio-content">
+                    <p><strong>My Learning:</strong> Studied viral Instagram content patterns and engagement strategies</p>
+                    <p><strong>My Approach:</strong> Created a comprehensive content calendar framework with trending hashtags research, optimal posting times, and AI-generated content ideas</p>
+                    <div class="portfolio-metrics">
+                        <span class="metric">30-Day Strategy</span>
+                        <span class="metric">50+ Content Ideas</span>
+                        <span class="metric">Ready to Test</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-card">
+                <div class="portfolio-header">
+                    <h3>YouTube Channel Strategy</h3>
+                    <div class="portfolio-tag">Algorithm Study</div>
+                    <div class="portfolio-tag">Content Planning</div>
+                </div>
+                <div class="portfolio-content">
+                    <p><strong>My Research:</strong> Analyzed top-performing YouTube channels in tech and lifestyle niches</p>
+                    <p><strong>My Framework:</strong> Developed video script templates, thumbnail strategies, and SEO optimization techniques</p>
+                    <div class="portfolio-metrics">
+                        <span class="metric">10 Script Templates</span>
+                        <span class="metric">SEO Optimized</span>
+                        <span class="metric">Hook Strategies</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-card">
+                <div class="portfolio-header">
+                    <h3>AI Content Automation</h3>
+                    <div class="portfolio-tag">Tool Integration</div>
+                    <div class="portfolio-tag">Workflow Design</div>
+                </div>
+                <div class="portfolio-content">
+                    <p><strong>My Innovation:</strong> Created AI-powered content workflows using ChatGPT, Claude, and automation tools</p>
+                    <p><strong>My System:</strong> Designed prompt templates and content pipelines for consistent, high-quality output</p>
+                    <div class="portfolio-metrics">
+                        <span class="metric">5+ AI Tools</span>
+                        <span class="metric">Automated Workflow</span>
+                        <span class="metric">Time Efficient</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Honest Learning Journey Section -->
+        <div style="background: #f8f9ff; padding: 3rem; border-radius: 15px; margin-top: 3rem; text-align: center;">
+            <h3 style="color: #333; margin-bottom: 1rem;">🎯 My Honest Commitment</h3>
+            <p style="color: #666; font-size: 1.1rem; line-height: 1.8;">
+                <strong>Full Transparency:</strong> I haven't managed official social media accounts yet, but I've spent months studying successful campaigns, analyzing viral content, and mastering AI tools. I'm ready to apply this knowledge to your first project with dedication, fresh ideas, and a hunger to prove myself. <br><br>
+                <strong>What I Bring:</strong> Latest industry knowledge, AI-powered efficiency, competitive rates, and 100% commitment to your success.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" style="background: #f8f9ff;">
+        <h2 class="section-title">My Tech Arsenal</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h4><i class="fas fa-robot"></i> AI Tools Expertise</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">ChatGPT</span>
+                    <span class="skill-tag">Claude AI</span>
+                    <span class="skill-tag">Notion AI</span>
+                    <span class="skill-tag">RunwayML</span>
+                    <span class="skill-tag">Stable Diffusion</span>
+                    <span class="skill-tag">Jasper</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-share-alt"></i> Social Media Platforms</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Instagram</span>
+                    <span class="skill-tag">LinkedIn</span>
+                    <span class="skill-tag">Twitter/X</span>
+                    <span class="skill-tag">YouTube</span>
+                    <span class="skill-tag">TikTok</span>
+                    <span class="skill-tag">Facebook</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-chart-bar"></i> Analytics & SEO</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Google Analytics</span>
+                    <span class="skill-tag">SEMrush</span>
+                    <span class="skill-tag">Ahrefs</span>
+                    <span class="skill-tag">Social Analytics</span>
+                    <span class="skill-tag">Keyword Research</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h4><i class="fas fa-code"></i> Technical Skills</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">WordPress</span>
+                    <span class="skill-tag">Automation</span>
+                    <span class="skill-tag">CMS</span>
+                    <span class="skill-tag">API Integration</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-content">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Ready to Prove Myself with Your Project?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                I may be new to professional content writing, but I bring fresh perspective, AI-powered efficiency, and unlimited enthusiasm. Let's start with a small project and build something amazing together.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="mailto:salunkheomkar1001@gmail.com" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i> Let's Start Small
+                </a>
+                <a href="https://linkedin.com/in/omkar-salunkhe" class="btn btn-secondary" target="_blank">
+                    <i class="fab fa-linkedin"></i> Connect on LinkedIn
+                </a>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>salunkheomkar1001@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+91 93735 73102</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kolhapur, Maharashtra</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to floating nav
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.floating-nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(255,255,255,0.98)';
+                nav.style.boxShadow = '0 8px 35px rgba(0,0,0,0.25)';
+            } else {
+                nav.style.background = 'rgba(255,255,255,0.95)';
+                nav.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+            }
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const finalNumber = stat.textContent;
+                        stat.textContent = '0';
+                        
+                        const increment = () => {
+                            const current = parseInt(stat.textContent);
+                            const target = parseInt(finalNumber);
+                            
+                            if (current < target) {
+                                stat.textContent = Math.min(current + Math.ceil(target / 30), target);
+                                setTimeout(increment, 50);
+                            } else {
+                                stat.textContent = finalNumber;
+                            }
+                        };
+                        
+                        setTimeout(increment, 200);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stats-grid').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effect to service cards
+        document.querySelectorAll('.service-card, .portfolio-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
